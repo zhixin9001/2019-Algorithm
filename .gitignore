@@ -21,3 +21,10 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+algs4/algs4-data
+algs4/PractiseCode/.recommenders/
+algs4/algs4-master/.gradle/
+algs4/algs4-master/.settings/
+algs4/algs4-master/.project
+algs4/algs4-master/bin/
