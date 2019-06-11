@@ -1,11 +1,12 @@
 package algs4;
 
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 
-public class StackResizeArray<Item> {
+public class StackResizeArray<Item> implements Iterable<Item> {
 	private Item[] a; // array of items
 	private int n; // number of elements on stack
 
@@ -53,10 +54,35 @@ public class StackResizeArray<Item> {
 			resize(a.length / 2);
 		return item;
 	}
-	
-    public static void main(String[] args) {
-    	StdOut.println("StackResizeArray");
-//    	StackResizeArray<String> stack = new StackResizeArray<String>();
+
+	@Override
+	public Iterator<Item> iterator() {
+		return new ListIterator<Item>();
+	}
+
+	private class ListIterator<Item> implements Iterator<Item> {
+		private int i;
+
+		public ListIterator() {
+			i = n - 1;
+		}
+
+		@Override
+		public boolean hasNext() {
+			return i>=0;
+		}
+
+		@Override
+		public Item next() {
+			if(!hasNext()) throw new NoSuchElementException();
+			return (Item) a[i--];
+		}
+
+	}
+
+	public static void main(String[] args) {
+		StdOut.println("StackResizeArray");
+    	StackResizeArray<String> stack = new StackResizeArray<String>();
 //        while (!StdIn.isEmpty()) {
 //            String item = StdIn.readString();
 //            if (!item.equals("-")) stack.push(item);
@@ -64,16 +90,24 @@ public class StackResizeArray<Item> {
 //        }
 //        StdOut.println("StackResizeArray");
 //        StdOut.println("(" + stack.size() + " left on stack)");
-    	
-    	StackResizeArray<Integer> stack=new StackResizeArray<Integer>();
-		while(!StdIn.isEmpty()) {
-			int item=StdIn.readInt();
-			if(item!=0) {
-				stack.push(item);
-			}else if(!stack.isEmpty()) {
-				StdOut.print(stack.pop()+" ");
-			}
+
+//		StackResizeArray<Integer> stack = new StackResizeArray<Integer>();
+//		while (!StdIn.isEmpty()) {
+//			int item = StdIn.readInt();
+//			if (item != 0) {
+//				stack.push(item);
+//			} else if (!stack.isEmpty()) {
+//				StdOut.print(stack.pop() + " ");
+//			}
+//		}
+		
+		stack.push("a");
+		stack.push("a2");
+		stack.push("a3");
+		
+		for(String s:stack) {
+			StdOut.println(s);
 		}
-    }
+	}
 
 }
