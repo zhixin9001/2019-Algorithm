@@ -9,24 +9,35 @@ public class SortSelection {
 		for (int i = 0; i < a.length; i++) {
 			int min = i;
 			for (int j = i + 1; j < a.length; j++) {
-				if (a[i].compareTo(a[j]) > 0) {
+				if (less(a[j], a[min])) {
 					min = j;
 				}
 			}
-			Comparable swap = a[i];
-			a[i] = a[min];
-			a[min] = swap;
+			exch(a, i, min);
 		}
 	}
-	
+
+	private static boolean less(Comparable a, Comparable b) {
+		return a.compareTo(b) < 0;
+	}
+
+	private static void exch(Object[] a, int i, int j) {
+		Object swap = a[i];
+		a[i] = a[j];
+		a[j] = swap;
+	}
+
 	public static void show(Comparable[] a) {
-		for(Comparable c:a) {
-			StdOut.print(c);
+		for (Comparable c : a) {
+			StdOut.println(c);
 		}
 	}
 
 	public static void main(String[] args) {
+		StdOut.println("1");
 		String[] a = StdIn.readAllStrings();
 		SortSelection.sort(a);
+		SortSelection.show(a);
+
 	}
 }

@@ -83,13 +83,13 @@ public class StackResizeArray<Item> implements Iterable<Item> {
 	public static void main(String[] args) {
 		StdOut.println("StackResizeArray");
     	StackResizeArray<String> stack = new StackResizeArray<String>();
-//        while (!StdIn.isEmpty()) {
-//            String item = StdIn.readString();
-//            if (!item.equals("-")) stack.push(item);
-//            else if (!stack.isEmpty()) StdOut.print(stack.pop() + " ");
-//        }
-//        StdOut.println("StackResizeArray");
-//        StdOut.println("(" + stack.size() + " left on stack)");
+        while (!StdIn.isEmpty()) {
+            String item = StdIn.readString();
+            if (!item.equals("-")) stack.push(item);
+            else if (!stack.isEmpty()) StdOut.print(stack.pop() + " ");
+        }
+        StdOut.println("StackResizeArray");
+        StdOut.println("(" + stack.size() + " left on stack)");
 
 //		StackResizeArray<Integer> stack = new StackResizeArray<Integer>();
 //		while (!StdIn.isEmpty()) {
@@ -101,13 +101,13 @@ public class StackResizeArray<Item> implements Iterable<Item> {
 //			}
 //		}
 		
-		stack.push("a");
-		stack.push("a2");
-		stack.push("a3");
+//		stack.push("a");
+//		stack.push("a2");
+//		stack.push("a3");
 		
-		for(String s:stack) {
-			StdOut.println(s);
-		}
+//		for(String s:stack) {
+//			StdOut.println(s);
+//		}
 	}
 
 }
