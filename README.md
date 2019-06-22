@@ -19,3 +19,6 @@ eclipse程序执行后，中止按ctrl+Z
 cmd, invokes cmd.exe, which knows what you mean by <
 /c, tells cmd.exe to process one command following on the command lineand then exit.
 --%, tells PowerShell to leave the rest of the command line alone, so that cmd.exe can deal with the < redirection.
+
+##  unmappable character for encoding GBK
+目前发现有的中文会这样，比如“你好啊”，但“试试”没有问题；尝试修改编码方式也没用，那么注释用英文吧

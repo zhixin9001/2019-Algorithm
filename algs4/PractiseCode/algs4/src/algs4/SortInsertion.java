@@ -35,7 +35,7 @@ public class SortInsertion {
 		}
 	}
 
-	// 改进
+	// 改进，只交换一次
 	public static void sortP1(int[] a) {
 		for (int i = 0; i < a.length; i++) {
 			int insertIndex = i;
@@ -43,12 +43,14 @@ public class SortInsertion {
 				StdOut.println(a[i] + "<" + a[j - 1]);
 				insertIndex = j - 1;
 			}
-			StdOut.println(i + "<->" + insertIndex);
-			exch(a, i, insertIndex);
-			// if (insertIndex != i) {
-			// StdOut.println(i + "<->" + insertIndex);
-			// exch(a, i, insertIndex);
-			// }
+			if (insertIndex != i) {
+				StdOut.println(i + "<->" + insertIndex);
+				exch(a, i, insertIndex); 
+				/**这一步不对，想要只交换一次，是不可行的，比如  8  30 -30 的执行轨迹为：
+				 * -30<30  -30<8  2<->0，最终结果为-30 30 8，把-30 与8交换，
+				 * 不能交换，而应该吧-30插入8的前面，其它序列不能变化，要实现这种，除非用链表，否则还是得一次次交换的
+				 */
+			}
 		}
 	}
 
