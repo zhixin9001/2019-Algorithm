@@ -15,7 +15,8 @@ eclipse的输入输出重定向太难用，而且不同的版本功能有差异
 eclipse程序执行后，中止按ctrl+Z
 
 ## RedirectionNotSupported
-如果cmd包含重定向，运行报错RedirectionNotSupported，可以使用cmd /c --% java algs4.SortInsertion < ..\..\..\algs4-data\8ints.txt
+如果cmd包含重定向，运行报错RedirectionNotSupported，
+可以使用cmd /c --% java algs4.SortInsertion < ..\..\..\algs4-data\8ints.txt
 cmd, invokes cmd.exe, which knows what you mean by <
 /c, tells cmd.exe to process one command following on the command lineand then exit.
 --%, tells PowerShell to leave the rest of the command line alone, so that cmd.exe can deal with the < redirection.

@@ -9,7 +9,7 @@ public class SortMerge {
 
     private static int[] aux;
 
-    private static void merge(int[] a, int lo, int mid, int hi) {  //
+    private static void merge(int[] a, int lo, int mid, int hi) { //
         int i = lo, j = mid + 1;
         for (int k = lo; k <= hi; k++) {
             aux[k] = a[k];
@@ -59,6 +59,8 @@ public class SortMerge {
 
     }
 
+    private static final int CUTOFF = 1000; // cutoff to insertion sort
+
     private static void sort(int[] a, int lo, int hi) {
         if (hi <= lo) {
             return;
@@ -79,14 +81,39 @@ public class SortMerge {
         mergeP(a, lo, mid, hi);
     }
 
+    private static void sortP1(int[] a, int lo, int hi) {
+        if (hi <= lo + CUTOFF) { // this's is the condition to ending the recursive
+            insertionSort(a, lo, hi);
+            return;
+        }
+        int mid = lo + (hi - lo) / 2;
+        sortP(a, lo, mid);
+        sortP(a, mid + 1, hi);
+        mergeP(a, lo, mid, hi);
+    }
+
+    public static void insertionSort(int[] a, int lo, int hi) {
+        for (int i = lo; i <= hi; i++) {
+            for (int j = i; j > 0 && (a[j] < a[j - 1]); j--) {
+                exch(a, j, j - 1);
+            }
+        }
+    }
+
+    private static void exch(int[] a, int i, int j) {
+        int swap = a[i];
+        a[i] = a[j];
+        a[j] = swap;
+    }
+
     private static void sort(int[] a) {
         aux = new int[a.length];
         sort(a, 0, a.length - 1);
     }
 
     private static void sortP(int[] a) {
-        aux = new int[a.length]; 
-        sortP(a, 0, a.length - 1); //试试 must be a.length-1
+        aux = new int[a.length];
+        sortP1(a, 0, a.length - 1); // 试试 must be a.length-1
     }
 
     public static void main(String[] args) {
@@ -95,9 +122,9 @@ public class SortMerge {
         StdOut.println(1);
         Stopwatch timer = new Stopwatch();
         SortMerge.sortP(a);
-        for (int i : a) {
-            StdOut.println(i);
-        }
-        // StdOut.println(timer.elapsedTime());
+        // for (int i : a) {
+        //     StdOut.println(i);
+        // }
+        StdOut.println(timer.elapsedTime());
     }
 }
