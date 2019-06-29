@@ -10,6 +10,10 @@ public class SortQuick {
 
     public static void sort(int[] a) {
         StdRandom.shuffle(a);
+        for (int i : a) {
+            StdOut.print(i);
+            StdOut.print(" ");
+        }
         sort(a, 0, a.length - 1);
         assert isSorted(a);
     }
@@ -50,8 +54,14 @@ public class SortQuick {
             // check if pointers cross
             if (i >= j)
                 break;
+                StdOut.println();
+            StdOut.println("i=" + i + " j=" + j);
 
             exch(a, i, j);
+            for (int ii : a) {
+                StdOut.print(ii);
+                StdOut.print(" ");
+            }
         }
 
         // put partitioning item v at a[j]
