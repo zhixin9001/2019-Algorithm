@@ -49,7 +49,7 @@ public class Josephus {
     //     Josephus josephus = new Josephus(7);
     //     while (josephus.size() > 1) {
     //         StdOut.println("size=" + josephus.size());
-    //         Node killNext = josephus.first;
+    //         Node killNext = josephus.first;  //needn't back to first
     //         for (int i = 0; i < 2; i++) {
     //             killNext = killNext.next;
     //         }
@@ -69,9 +69,11 @@ public class Josephus {
 
         while (!queue.isEmpty()) {
             for (int i = 0; i < m-1; i++)
-                queue.enqueue(queue.dequeue());
+                queue.enqueue(queue.dequeue());  //dequeue + enqueue, same as a cycle queue
             StdOut.print(queue.dequeue() + " ");
         } 
         StdOut.println();
     }
 }
+
+//java exercise.Josephus 2 7
