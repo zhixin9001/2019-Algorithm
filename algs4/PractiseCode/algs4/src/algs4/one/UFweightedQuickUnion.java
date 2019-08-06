@@ -25,7 +25,8 @@ public class UFweightedQuickUnion {
         count = n;
         for (int i = 0; i < n; i++) {
             parent[i] = i;
-            size[i] = i;
+            //size[i] = i;
+            size[i]=1;  //1 not i
         }
     }
 
@@ -56,30 +57,30 @@ public class UFweightedQuickUnion {
     /**
      * Returns true if the the two sites are in the same component.
      *
-     * @param p the integer representing one site
-     * @param q the integer representing the other site
+     * @param a the integer representing one site
+     * @param b the integer representing the other site
      * @return {@code true} if the two sites {@code p} and {@code q} are in the same
      *         component; {@code false} otherwise
      * @throws IllegalArgumentException unless both {@code 0 <= p < n} and
      *                                  {@code 0 <= q < n}
      */
-    public boolean connected(int p, int q) {
-        return find(p) == find(q);
+    public boolean connected(int a, int b) {
+        return find(a) == find(b);
     }
 
     /**
      * Merges the component containing site {@code p} with the the component
      * containing site {@code q}.
      *
-     * @param p the integer representing one site
-     * @param q the integer representing the other site
+     * @param a the integer representing one site
+     * @param b the integer representing the other site
      * @throws IllegalArgumentException unless both {@code 0 <= p < n} and
      *                                  {@code 0 <= q < n}
      */
-    public void union(int p, int q) {
-        int pRoot = find(p);
-        int qRoot = find(q);
-        if (pRoot == qRoot) {
+    public void union(int a, int b) {
+        int aRoot = find(a);
+        int bRoot = find(b);
+        if (aRoot == bRoot) {
             return;
         }
 
@@ -91,12 +92,12 @@ public class UFweightedQuickUnion {
         // size[p]+=size[q];
         // }
 
-        if (size[pRoot] < size[qRoot]) {
-            parent[pRoot] = qRoot;
-            size[qRoot] += size[qRoot];
+        if (size[aRoot] < size[bRoot]) {
+            parent[aRoot] = bRoot;
+            size[bRoot] += size[aRoot];
         } else {
-            parent[qRoot] = pRoot;
-            size[pRoot] += size[qRoot];
+            parent[bRoot] = aRoot;
+            size[aRoot] += size[bRoot];
         }
         count--;
     }
@@ -122,12 +123,12 @@ public class UFweightedQuickUnion {
         UFweightedQuickUnion uf = new UFweightedQuickUnion(n);
         Stopwatch timer = new Stopwatch();
         while (!StdIn.isEmpty()) {
-            int p = StdIn.readInt();
-            int q = StdIn.readInt();
-            if (uf.connected(p, q))
+            int a = StdIn.readInt();
+            int b = StdIn.readInt();
+            if (uf.connected(a, b))
                 continue;
-            uf.union(p, q);
-            StdOut.println(p + " " + q);
+            uf.union(a, b);
+            StdOut.println(a + " " + b);
         }
         StdOut.println(uf.count() + " components");
         StdOut.println(timer.elapsedTime());
