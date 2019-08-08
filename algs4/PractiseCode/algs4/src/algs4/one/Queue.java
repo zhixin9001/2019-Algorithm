@@ -19,11 +19,11 @@ public class Queue<Item> {
     public void enqueue(Item item) {
         Node<Item> oldLast = last;
         last = new Node<Item>();
-        last.item = item;
+        newNode.item = item;
         if (isEmpty()) {
-            first = last;
+            first = last;  //first time enqueue, first is null, should set it
         } else {
-            oldLast.next = last;
+            oldLast.next = newNode;
         }
         N++;
     }
@@ -34,11 +34,10 @@ public class Queue<Item> {
         }
         Item result = first.item;
         first = first.next;
-        N--;// isEmpty()should be after it
+        N--;
         if (isEmpty()) {
             last = null;
         }
-        //N--;//
         return result;
     }
 
@@ -57,7 +56,7 @@ public class Queue<Item> {
             queue.enqueue(item);
         }
 
-        while(!queue.isEmpty()){
+        while (!queue.isEmpty()) {
             StdOut.println(queue.dequeue());
         }
     }
