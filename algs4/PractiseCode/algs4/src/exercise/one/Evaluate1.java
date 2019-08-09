@@ -4,16 +4,14 @@ import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.Stack;
 
-public class Evaluate {
+public class Evaluate1 {
     public static void main(String[] args) {
         Stack<String> ops = new Stack<String>();
-        Stack<Double> vals = new Stack<Double>();
+        Stack<String> vals = new Stack<String>();
 
         while (!StdIn.isEmpty()) {
             String s = StdIn.readString();
-            if (s.equals("("))
-                ;
-            else if (s.equals("+"))
+            if (s.equals("+"))
                 ops.push(s);
             else if (s.equals("-"))
                 ops.push(s);
@@ -21,25 +19,20 @@ public class Evaluate {
                 ops.push(s);
             else if (s.equals("/"))
                 ops.push(s);
-            else if (s.equals("sqrt"))
-                ops.push(s);
             else if (s.equals(")")) {
-                Double v = vals.pop();
+                String v = vals.pop();
                 String op = ops.pop();
                 if (op.equals("+"))
-                    v = v + vals.pop();
+                    v = "(" + vals.pop() + "+" + v + ")";
                 else if (op.equals("-"))
-                    v = vals.pop() - v;
+                    v = "(" + vals.pop() + "-" + v + ")";
                 else if (op.equals("*"))
-                    v = vals.pop() * v;
+                    v = "(" + vals.pop() + "*" + v + ")";
                 else if (op.equals("/"))
-                    v = vals.pop() / v;
-                else if (op.equals("sqrt"))
-                    v = Math.sqrt(v);
-
+                    v = "(" + vals.pop() + "/" + v + ")";
                 vals.push(v);
             } else {
-                vals.push(Double.parseDouble(s));
+                vals.push(s);
             }
         }
 
