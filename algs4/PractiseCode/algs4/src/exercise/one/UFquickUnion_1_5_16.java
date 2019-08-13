@@ -82,10 +82,10 @@ public class UFquickUnion_1_5_16 {
         int n = StdIn.readInt();
         StdOut.println(n);
         UFquickUnion_1_5_16 uf = new UFquickUnion_1_5_16(n);
-        StdDraw.setXscale(0, 1000000);
-        StdDraw.setYscale(0, 1000000);
+        StdDraw.setXscale(0, 1000);
+        StdDraw.setYscale(0, 1000);
         StdDraw.setPenRadius(0.005);
-        Stopwatch timer = new Stopwatch();
+        // Stopwatch timer = new Stopwatch();
         while (!StdIn.isEmpty()) {
             // draw
             if (uf.ConnTimes() > 0) {
@@ -95,6 +95,7 @@ public class UFquickUnion_1_5_16 {
                 StdDraw.setPenColor(StdDraw.RED);
                 StdDraw.point(uf.ConnTimes(), uf.Total() / uf.ConnTimes());
             }
+            StdOut.println(uf.ConnTimes() + " " + uf.Cost());
             //
             int p = StdIn.readInt();
             int q = StdIn.readInt();
@@ -104,6 +105,6 @@ public class UFquickUnion_1_5_16 {
             // StdOut.println(p + " " + q);
         }
         StdOut.println(uf.count() + " components");
-        StdOut.println(timer.elapsedTime());
+        // StdOut.println(timer.elapsedTime());
     }
 }
