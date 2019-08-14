@@ -92,8 +92,8 @@ public class UFquickFind_1_5_16 {
         int n = StdIn.readInt();
         StdOut.println(n);
         UFquickFind_1_5_16 ufQquickFind = new UFquickFind_1_5_16(n);
-        StdDraw.setXscale(0, 1000);
-        StdDraw.setYscale(0, 2000);
+        StdDraw.setXscale(0, 10000);
+        StdDraw.setYscale(0, 2000000);
         StdDraw.setPenRadius(0.005);
         while (!StdIn.isEmpty()) {
             // draw
@@ -104,13 +104,14 @@ public class UFquickFind_1_5_16 {
                 StdDraw.setPenColor(StdDraw.RED);
                 StdDraw.point(ufQquickFind.ConnTimes(), ufQquickFind.Total() / ufQquickFind.ConnTimes());
             }
+            StdOut.println(ufQquickFind.ConnTimes() + " " + ufQquickFind.Cost());
             //
             int p = StdIn.readInt();
             int q = StdIn.readInt();
             if (ufQquickFind.connected(p, q))
                 continue;
             ufQquickFind.union(p, q);
-            StdOut.println(p + " " + q);
+            
         }
         StdOut.println(ufQquickFind.count() + " components");
     }
