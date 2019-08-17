@@ -5,30 +5,12 @@ import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.Stopwatch;
 
-public class Selection {
+public class Insertion {
     public static void sort(Comparable[] a) {
-        // int min = 0;
-        // for (int i = 0; i < a.length; i++) {
-        // min = i;
-        // for (int j = i + 1; j < a.length; j++) {
-        // if (less(a[j], a[min])) {
-        // min = j;
-        // }
-        // }
-        // exch(a, i, min);
-        // }
-        Comparable min;
-        int minIndex = 0;
-        for (int i = 0; i < a.length; i++) {
-            min = a[i];
-            minIndex = i;
-            for (int j = i + 1; j < a.length; j++) {
-                if (less(a[j], min)) {
-                    min = a[j];
-                    minIndex = j;
-                }
+        for (int i = 1; i < a.length; i++) {
+            for (int j = i; j > 0 && less(j, j - 1); j--) {
+                exch(a, j, j - 1);
             }
-            exch(a, i, minIndex);
         }
     }
 
@@ -68,8 +50,8 @@ public class Selection {
 
         Stopwatch timer = new Stopwatch();
         Selection.sort(a1);
-        assert Selection.isSorted(a1);
-        Selection.show(a1);
+        assert Insertion.isSorted(a1);
+        Insertion.show(a1);
         // StdOut.println(timer.elapsedTime());
     }
 }
