@@ -1,9 +1,10 @@
-package algs4.two;
+package exercise.two;
 
 import java.util.Comparator;
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.Stopwatch;
+import edu.princeton.cs.algs4.StdDraw;
 
 public class Selection {
     public static void sort(Comparable[] a) {
@@ -30,6 +31,12 @@ public class Selection {
                 }
             }
             exch(a, i, minIndex);
+            int y = 0;
+            // StdDraw.
+            for (int x = 0; x < a.length; x++) {
+                y = Integer.parseInt(a[x].toString());
+                StdDraw.point(x, y);
+            }
         }
     }
 
@@ -61,16 +68,21 @@ public class Selection {
     }
 
     public static void main(String[] args) {
-        int[] input = StdIn.readAllInts();
-        Integer[] a1 = new Integer[input.length];
-        for (int i = 0; i < input.length; i++) {
-            a1[i] = input[i];
+        // int[] input = StdIn.readAllInts();
+
+        Integer[] a1 = new Integer[10];
+        for (int i = 0; i < 10; i++) {
+            a1[i] = 10 - i;
         }
+        StdDraw.setXscale(0, 15);
+        StdDraw.setYscale(0, 15);
+        StdDraw.setPenRadius(0.005);
+        StdDraw.setPenColor(StdDraw.GRAY);
 
         Stopwatch timer = new Stopwatch();
         Selection.sort(a1);
         assert Selection.isSorted(a1);
-        Selection.show(a1);
+        // Selection.show(a1);
         // StdOut.println(timer.elapsedTime());
     }
 }

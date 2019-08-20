@@ -7,6 +7,7 @@ import edu.princeton.cs.algs4.Stopwatch;
 
 public class Shell {
     public static void sort(Comparable[] a) {
+        // StdOut.println("Shellq, ");
         int N = a.length;
         int h = 1;
         while (h <= N / 3) {
@@ -14,8 +15,8 @@ public class Shell {
         }
 
         while (h >= 1) {
-            for (int i = /*1*/h; i < N; i = i + h) {
-                for (int j = i; j > 0 && less(j, j - h); j-=h) {
+            for (int i = h; i < N; i++) {
+                for (int j = i; j > h && less(a[j], a[j - h]); j -= h) {
                     exch(a, j, j - h);
                 }
             }
@@ -52,6 +53,7 @@ public class Shell {
 
     public static void main(String[] args) {
         int[] input = StdIn.readAllInts();
+        
         Integer[] a1 = new Integer[input.length];
         for (int i = 0; i < input.length; i++) {
             a1[i] = input[i];
