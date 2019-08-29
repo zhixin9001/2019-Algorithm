@@ -25,6 +25,7 @@
 package edu.princeton.cs.algs4;
 
 import java.util.Comparator;
+import edu.princeton.cs.algs4.Stopwatch;
 
 /**
  *  The {@code MergeX} class provides static methods for sorting an
@@ -225,8 +226,12 @@ public class MergeX {
      */
     public static void main(String[] args) {
         String[] a = StdIn.readAllStrings();
+        Stopwatch timer = new Stopwatch();
+
         MergeX.sort(a);
-        show(a);
+        StdOut.println(timer.elapsedTime());
+
+        // show(a);
     }
 }
 

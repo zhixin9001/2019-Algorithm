@@ -22,6 +22,7 @@
  ******************************************************************************/
 
 package edu.princeton.cs.algs4;
+import edu.princeton.cs.algs4.Stopwatch;
 
 /**
  *  The {@code Merge} class provides static methods for sorting an
@@ -168,8 +169,10 @@ public class Merge {
      */
     public static void main(String[] args) {
         String[] a = StdIn.readAllStrings();
+        Stopwatch timer = new Stopwatch();
         Merge.sort(a);
-        show(a);
+        StdOut.println(timer.elapsedTime());
+        // show(a);
     }
 }
 

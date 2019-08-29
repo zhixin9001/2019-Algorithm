@@ -5,6 +5,7 @@ import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.Stopwatch;
 import edu.princeton.cs.algs4.StdRandom;
+import exercise.two.MergeOptimize;
 
 public class SortCompare {
 
@@ -46,18 +47,33 @@ public class SortCompare {
         Double[] input = descInput(n);
         Double[] a1 = copy(input);
         Stopwatch timer = new Stopwatch();
-        Shell.sort(a1);
-        StdOut.println("Shell, " + timer.elapsedTime());
+        // InsertionX.sort(a1);
+        // StdOut.println("InsertionX, " + timer.elapsedTime());
 
+        // a1 = copy(input);
+        // timer = new Stopwatch();
+        // Selection.sort(a1);
+        // StdOut.println("Selection, " + timer.elapsedTime());
+
+        // a1 = copy(input);
+        // timer = new Stopwatch();
+        // Insertion.sort(a1);
+        // StdOut.println("Insertion, " + timer.elapsedTime());
+        
+        // a1 = copy(input);
+        // timer = new Stopwatch();
+        // Shell.sort(a1);
+        // StdOut.println("Shell, " + timer.elapsedTime());
+        
         a1 = copy(input);
         timer = new Stopwatch();
-        Selection.sort(a1);
-        StdOut.println("Selection, " + timer.elapsedTime());
-
+        Merge.sort(a1);
+        StdOut.println("Merge, " + timer.elapsedTime());
+         
         a1 = copy(input);
         timer = new Stopwatch();
-        Insertion.sort(a1);
-        StdOut.println("Insertion, " + timer.elapsedTime());
+        MergeOptimize.sort(a1);
+        StdOut.println("MergeOptimize, " + timer.elapsedTime());
 
     }
 }
