@@ -5,7 +5,6 @@ import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.Stopwatch;
 import edu.princeton.cs.algs4.StdRandom;
-import exercise.two.MergeOptimize;
 
 public class SortCompare {
 
@@ -74,6 +73,11 @@ public class SortCompare {
         timer = new Stopwatch();
         MergeOptimize.sort(a1);
         StdOut.println("MergeOptimize, " + timer.elapsedTime());
+         
+        a1 = copy(input);
+        timer = new Stopwatch();
+        MergeBU.sort(a1);
+        StdOut.println("MergeBU, " + timer.elapsedTime());
 
     }
 }

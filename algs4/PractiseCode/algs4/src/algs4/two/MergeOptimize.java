@@ -1,4 +1,4 @@
-package exercise.two;
+package algs4.two;
 
 import java.util.Comparator;
 import edu.princeton.cs.algs4.StdIn;
@@ -7,7 +7,7 @@ import edu.princeton.cs.algs4.Stopwatch;
 
 public class MergeOptimize {
 
-    private static int CUTOFF = 4;
+    private static int CUTOFF = 20;
 
     private static void merge(Comparable[] src, Comparable[] dst, int lo, int mid, int hi) { //
         int i = lo, j = mid + 1;
@@ -29,10 +29,17 @@ public class MergeOptimize {
     }
 
     private static void sort(Comparable[] src, Comparable[] dst, int lo, int hi) {
+        // if (hi <= lo + CUTOFF) {
+        // insertionSort(dst, lo, hi);
+        // return;
+        // }
         if (hi <= lo + CUTOFF) {
             insertionSort(dst, lo, hi);
             return;
         }
+        // if (hi <= lo) {
+        // return;
+        // }
         int mid = lo + (hi - lo) / 2;
         sort(src, dst, lo, mid);
         sort(src, dst, mid + 1, hi);
@@ -54,15 +61,16 @@ public class MergeOptimize {
 
     public static void insertionSort(Comparable[] a, int lo, int hi) {
         for (int i = lo; i <= hi; i++) {
-            for (int j = i; j > 0 && less(a[j], a[j - 1]); j--) {
+            for (int j = i; j > lo && less(a[j], a[j - 1]); j--) {
                 exch(a, j, j - 1);
             }
         }
     }
 
+    
     private static boolean less(Comparable a, Comparable b) {
-        return a.compareTo(b) < 0;
-    }
+        return a.compareTo(b) < 0;  
+    }  
 
     private static void exch(Comparable[] a, int i, int j) {
         Comparable swap = a[i];

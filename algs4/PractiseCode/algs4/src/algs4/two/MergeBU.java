@@ -1,61 +1,39 @@
-package exercise.two;
+package algs4.two;
 
 import java.util.Comparator;
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.Stopwatch;
 
-public class MergeOptimize {
+public class MergeBU {
 
-    private static int CUTOFF = 4;
+    private static Comparable[] aux;
 
-    private static void merge(Comparable[] src, Comparable[] dst, int lo, int mid, int hi) { //
+    private static void merge(Comparable[] a, int lo, int mid, int hi) { //
         int i = lo, j = mid + 1;
         for (int k = lo; k <= hi; k++) {
-            src[k] = dst[k];
+            aux[k] = a[k];
         }
 
         for (int k = lo; k <= hi; k++) {
             if (i > mid) {
-                dst[k] = src[j++];
+                a[k] = aux[j++];
             } else if (j > hi) {
-                dst[k] = src[i++];
-            } else if (less(src[i], src[j])) {
-                dst[k] = src[i++];
+                a[k] = aux[i++];
+            } else if (less(aux[i], aux[j])) {
+                a[k] = aux[i++];
             } else {
-                dst[k] = src[j++];
+                a[k] = aux[j++];
             }
         }
     }
 
-    private static void sort(Comparable[] src, Comparable[] dst, int lo, int hi) {
-        if (hi <= lo + CUTOFF) {
-            insertionSort(dst, lo, hi);
-            return;
-        }
-        int mid = lo + (hi - lo) / 2;
-        sort(src, dst, lo, mid);
-        sort(src, dst, mid + 1, hi);
-
-        // if (!less(src[mid + 1], src[mid])) {
-        // for (int i = lo; i <= hi; i++) {
-        // dst[i] = src[i];
-        // }
-        // return;
-        // }
-
-        merge(src, dst, lo, mid, hi);
-    }
-
     public static void sort(Comparable[] a) {
-        Comparable[] aux = a.clone();
-        sort(aux, a, 0, a.length - 1);
-    }
-
-    public static void insertionSort(Comparable[] a, int lo, int hi) {
-        for (int i = lo; i <= hi; i++) {
-            for (int j = i; j > 0 && less(a[j], a[j - 1]); j--) {
-                exch(a, j, j - 1);
+        int N = a.length;
+        aux = new Comparable[N];
+        for (int sz = 1; sz < N; sz = sz + sz) {
+            for (int lo = 0; lo < N - sz; lo += sz + sz) {
+                merge(a, lo, lo + sz - 1, Math.min(lo + sz + sz - 1, N - 1));
             }
         }
     }

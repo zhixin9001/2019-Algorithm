@@ -81,7 +81,7 @@ public class Merge {
         Stopwatch timer = new Stopwatch();
         sort(a1);
         assert isSorted(a1);
-        // show(a1);
+        show(a1);
         // StdOut.println(timer.elapsedTime());
     }
 }
