@@ -74,10 +74,10 @@ public class SortCompare {
         MergeOptimize.sort(a1);
         StdOut.println("MergeOptimize, " + timer.elapsedTime());
          
-        a1 = copy(input);
-        timer = new Stopwatch();
-        MergeBU.sort(a1);
-        StdOut.println("MergeBU, " + timer.elapsedTime());
+        // a1 = copy(input);
+        // timer = new Stopwatch();
+        // MergeBU.sort(a1);
+        // StdOut.println("MergeBU, " + timer.elapsedTime());
 
     }
 }
