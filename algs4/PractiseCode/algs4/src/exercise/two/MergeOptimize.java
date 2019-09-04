@@ -1,46 +1,63 @@
-package algs4.two;
+package exercise.two;
 
 import java.util.Comparator;
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.Stopwatch;
 
-public class Merge {
+public class MergeOptimize {
 
-    private static Comparable[] aux;
+    private static int CUTOFF = 4;
 
-    private static void merge(Comparable[] a, int lo, int mid, int hi) { //
+    private static void merge(Comparable[] src, Comparable[] dst, int lo, int mid, int hi) { //
         int i = lo, j = mid + 1;
         for (int k = lo; k <= hi; k++) {
-            aux[k] = a[k];
+            src[k] = dst[k];
         }
 
         for (int k = lo; k <= hi; k++) {
             if (i > mid) {
-                a[k] = aux[j++];
+                dst[k] = src[j++];
             } else if (j > hi) {
-                a[k] = aux[i++];
-            } else if (less(aux[i], aux[j])) {
-                a[k] = aux[i++];
+                dst[k] = src[i++];
+            } else if (less(src[i], src[j])) {
+                dst[k] = src[i++];
             } else {
-                a[k] = aux[j++];
+                dst[k] = src[j++];
             }
         }
     }
 
-    private static void sort(Comparable[] a, int lo, int hi) {
-        if (hi <= lo) {
+    private static void sort(Comparable[] src, Comparable[] dst, int lo, int hi) {
+        if (hi <= lo + CUTOFF) {
+            insertionSort(dst, lo, hi);
             return;
         }
         int mid = lo + (hi - lo) / 2;
-        sort(a, lo, mid);
-        sort(a, mid + 1, hi);
-        merge(a, lo, mid, hi);
+        sort(src, dst, lo, mid);
+        sort(src, dst, mid + 1, hi);
+
+        // if (!less(src[mid + 1], src[mid])) {
+        // for (int i = lo; i <= hi; i++) {
+        // dst[i] = src[i];
+        // }
+        // return;
+        // }
+
+        merge(src, dst, lo, mid, hi);
     }
 
     public static void sort(Comparable[] a) {
-        aux = new Comparable[a.length];
-        sort(a, 0, a.length - 1);
+        Comparable[] aux = a.clone();
+        sort(aux, a, 0, a.length - 1);
+    }
+
+    public static void insertionSort(Comparable[] a, int lo, int hi) {
+        for (int i = lo; i <= hi; i++) {
+            for (int j = i; j > 0 && less(a[j], a[j - 1]); j--) {
+                exch(a, j, j - 1);
+            }
+        }
     }
 
     private static boolean less(Comparable a, Comparable b) {
@@ -72,6 +89,7 @@ public class Merge {
 
     public static void main(String[] args) {
         int[] input = StdIn.readAllInts();
+
         Integer[] a1 = new Integer[input.length];
         for (int i = 0; i < input.length; i++) {
             a1[i] = input[i];
