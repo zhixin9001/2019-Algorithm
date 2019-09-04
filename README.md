@@ -1,6 +1,6 @@
 # Algorithm
 
-# 避坑
+# tipas
 ## 编译
 javac algs4\SortShell.java
 java algs4.SortShell < ..\..\..\algs4-data\32Kints.txt
@@ -23,6 +23,9 @@ cmd, invokes cmd.exe, which knows what you mean by <
 
 ##  unmappable character for encoding GBK
 目前发现有的中文会这样，比如“你好啊”，但“试试”没有问题；尝试修改编码方式也没用，那么注释用英文吧
+
+## git
+git config --global http.sslVerify false
 
 # 计划 & 复核
 ## 8.30

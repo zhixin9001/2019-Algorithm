@@ -59,10 +59,10 @@ public class SortCompare {
         // Insertion.sort(a1);
         // StdOut.println("Insertion, " + timer.elapsedTime());
         
-        // a1 = copy(input);
-        // timer = new Stopwatch();
-        // Shell.sort(a1);
-        // StdOut.println("Shell, " + timer.elapsedTime());
+        a1 = copy(input);
+        timer = new Stopwatch();
+        Shell.sort(a1);
+        StdOut.println("Shell, " + timer.elapsedTime());
         
         a1 = copy(input);
         timer = new Stopwatch();
@@ -74,10 +74,15 @@ public class SortCompare {
         MergeOptimize.sort(a1);
         StdOut.println("MergeOptimize, " + timer.elapsedTime());
          
-        // a1 = copy(input);
-        // timer = new Stopwatch();
-        // MergeBU.sort(a1);
-        // StdOut.println("MergeBU, " + timer.elapsedTime());
+        a1 = copy(input);
+        timer = new Stopwatch();
+        MergeBU.sort(a1);
+        StdOut.println("MergeBU, " + timer.elapsedTime());
+        
+        a1 = copy(input);
+        timer = new Stopwatch();
+        Quick.sort(a1);
+        StdOut.println("Quick, " + timer.elapsedTime());
 
     }
 }
