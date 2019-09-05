@@ -5,6 +5,8 @@ import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.Stopwatch;
 import edu.princeton.cs.algs4.StdRandom;
+// import edu.princeton.cs.algs4.Merge;
+// import edu.princeton.cs.algs4.Quick;
 
 public class SortCompare {
 
@@ -59,30 +61,36 @@ public class SortCompare {
         // Insertion.sort(a1);
         // StdOut.println("Insertion, " + timer.elapsedTime());
         
-        a1 = copy(input);
-        timer = new Stopwatch();
-        Shell.sort(a1);
-        StdOut.println("Shell, " + timer.elapsedTime());
+        // a1 = copy(input);
+        // timer = new Stopwatch();
+        // Shell.sort(a1);
+        // StdOut.println("Shell, " + timer.elapsedTime());
         
-        a1 = copy(input);
-        timer = new Stopwatch();
-        Merge.sort(a1);
-        StdOut.println("Merge, " + timer.elapsedTime());
+        // a1 = copy(input);
+        // timer = new Stopwatch();
+        // Merge.sort(a1);
+        // StdOut.println("Merge, " + timer.elapsedTime());
          
         // a1 = copy(input);
         // timer = new Stopwatch();
         // MergeOptimize.sort(a1);
         // StdOut.println("MergeOptimize, " + timer.elapsedTime());
          
-        a1 = copy(input);
-        timer = new Stopwatch();
-        MergeBU.sort(a1);
-        StdOut.println("MergeBU, " + timer.elapsedTime());
-        
         // a1 = copy(input);
         // timer = new Stopwatch();
-        // Quick.sort(a1);
-        // StdOut.println("Quick, " + timer.elapsedTime());
+        // MergeBU.sort(a1);
+        // StdOut.println("MergeBU, " + timer.elapsedTime());
+        
+        a1 = copy(input);
+        timer = new Stopwatch();
+        Quick.sort(a1);
+        StdOut.println("Quick, " + timer.elapsedTime());
+
+        
+        a1 = copy(input);
+        timer = new Stopwatch();
+        QuickX.sort(a1);
+        StdOut.println("QuickX, " + timer.elapsedTime());
 
     }
 }
