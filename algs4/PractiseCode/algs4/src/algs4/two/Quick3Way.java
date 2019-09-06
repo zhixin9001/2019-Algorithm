@@ -6,31 +6,8 @@ import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.Stopwatch;
 import edu.princeton.cs.algs4.StdRandom;
 
-public class QuickX {
-    private static int CUTOFF = 7;
+public class Quick3Way {
 
-    private static int partition(Comparable[] a, int lo, int hi) {
-        int n = hi - lo + 1;
-        int m = median3(a, lo, lo + n / 2, hi);
-        exch(a, lo, m);
-        int i = lo, j = hi + 1;
-        Comparable v = a[i];
-        while (true) {
-            while (less(a[++i], v)) { // less(a[i++], v)
-                if (i == hi)
-                    break;
-            }
-            while (less(v, a[--j])) { // less(v, a[j--])
-                if (j == lo)
-                    break;
-            }
-            if (i >= j)
-                break;
-            exch(a, i, j);
-        }
-        exch(a, lo, j);
-        return j;
-    }
 
     public static void sort(Comparable[] a) {
         StdRandom.shuffle(a);
@@ -38,26 +15,20 @@ public class QuickX {
     }
 
     private static void sort(Comparable[] a, int lo, int hi) {
-        if (lo + CUTOFF >= hi) {
-            insertionSort(a, lo, hi);
-            return;
+        if (hi <= lo) return;
+        int lt = lo, gt = hi;
+        Comparable v = a[lo];
+        int i = lo + 1;
+        while (i <= gt) {
+            int cmp = a[i].compareTo(v);
+            if      (cmp < 0) exch(a, lt++, i++);
+            else if (cmp > 0) exch(a, i, gt--);
+            else              i++;
         }
-        int j = partition(a, lo, hi);
-        sort(a, lo, j - 1);
-        sort(a, j + 1, hi);
-    }
 
-    private static void insertionSort(Comparable[] a, int lo, int hi) {
-        for (int i = lo; i <= hi; i++) {
-            for (int j = i; j > lo && less(a[j], a[j - 1]); j--) {
-                exch(a, j, j - 1);
-            }
-        }
-    }
-
-    private static int median3(Comparable[] a, int i, int j, int k) {
-        return (less(a[i], a[j]) ? (less(a[j], a[k]) ? j : less(a[i], a[k]) ? k : i)
-                : (less(a[k], a[j]) ? j : less(a[k], a[i]) ? k : i));
+        // a[lo..lt-1] < v = a[lt..gt] < a[gt+1..hi]. 
+        sort(a, lo, lt-1);
+        sort(a, gt+1, hi);
     }
 
     private static boolean less(Comparable a, Comparable b) {

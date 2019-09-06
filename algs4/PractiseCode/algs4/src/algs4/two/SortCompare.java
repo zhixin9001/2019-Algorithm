@@ -87,10 +87,15 @@ public class SortCompare {
         StdOut.println("Quick, " + timer.elapsedTime());
 
         
+        // a1 = copy(input);
+        // timer = new Stopwatch();
+        // QuickX.sort(a1);
+        // StdOut.println("QuickX, " + timer.elapsedTime());
+        
         a1 = copy(input);
         timer = new Stopwatch();
-        QuickX.sort(a1);
-        StdOut.println("QuickX, " + timer.elapsedTime());
+        Quick3Way.sort(a1);
+        StdOut.println("Quick3Way, " + timer.elapsedTime());
 
     }
 }
