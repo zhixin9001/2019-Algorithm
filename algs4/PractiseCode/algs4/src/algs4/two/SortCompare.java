@@ -37,7 +37,15 @@ public class SortCompare {
     public static Double[] descInput(int n) {
         Double[] a = new Double[n];
         for (int i = 0; i < n; i++) {
-            a[i] =n- i * 1.0;
+            a[i] = n - i * 1.0;
+        }
+        return a;
+    }
+
+    public static Double[] duplicateInput(int n) {
+        Double[] a = new Double[n];
+        for (int i = 0; i < n; i++) {
+            a[i] = (n % 100) * 1.0;
         }
         return a;
     }
@@ -45,7 +53,7 @@ public class SortCompare {
     public static void main(String[] args) {
         String arg1 = args[0];
         int n = Integer.parseInt(arg1);
-        Double[] input = descInput(n);
+        Double[] input = duplicateInput(n);
         Double[] a1 = copy(input);
         Stopwatch timer = new Stopwatch();
         // InsertionX.sort(a1);
@@ -60,38 +68,37 @@ public class SortCompare {
         // timer = new Stopwatch();
         // Insertion.sort(a1);
         // StdOut.println("Insertion, " + timer.elapsedTime());
-        
+
         // a1 = copy(input);
         // timer = new Stopwatch();
         // Shell.sort(a1);
         // StdOut.println("Shell, " + timer.elapsedTime());
-        
+
         // a1 = copy(input);
         // timer = new Stopwatch();
         // Merge.sort(a1);
         // StdOut.println("Merge, " + timer.elapsedTime());
-         
+
         // a1 = copy(input);
         // timer = new Stopwatch();
         // MergeOptimize.sort(a1);
         // StdOut.println("MergeOptimize, " + timer.elapsedTime());
-         
+
         // a1 = copy(input);
         // timer = new Stopwatch();
         // MergeBU.sort(a1);
         // StdOut.println("MergeBU, " + timer.elapsedTime());
-        
+
         a1 = copy(input);
         timer = new Stopwatch();
         Quick.sort(a1);
         StdOut.println("Quick, " + timer.elapsedTime());
 
-        
         // a1 = copy(input);
         // timer = new Stopwatch();
         // QuickX.sort(a1);
         // StdOut.println("QuickX, " + timer.elapsedTime());
-        
+
         a1 = copy(input);
         timer = new Stopwatch();
         Quick3Way.sort(a1);
