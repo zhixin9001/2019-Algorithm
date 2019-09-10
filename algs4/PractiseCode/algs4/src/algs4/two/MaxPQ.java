@@ -1,6 +1,8 @@
 package algs4.two;
 
 import java.util.Comparator;
+import edu.princeton.cs.algs4.StdIn;
+import edu.princeton.cs.algs4.StdOut;
 
 public class MaxPQ<Key extends Comparable<Key>> {
     private Key[] pq;
@@ -23,7 +25,7 @@ public class MaxPQ<Key extends Comparable<Key>> {
         swim(N);
     }
 
-    public key delMax() {
+    public Key delMax() {
         Key max = pq[1];
         exch(1, N--);
         pq[N + 1] = null;
@@ -41,5 +43,37 @@ public class MaxPQ<Key extends Comparable<Key>> {
         pq[j] = t;
     }
 
-    private 
+    private void swim(int k) {
+        while (k > 1 && less(k / 2, k)) {
+            exch(k / 2, k);
+            k = k / 2;
+        }
+    }
+
+    private void sink(int k) {
+        while (2 * k >= N) {
+            int j = 2 * k;
+            if (j < N && less(j, j + 1)) {
+                j++;
+            }
+
+            if (!less(k, j)) {
+                break;
+            }
+
+            exch(k, j);
+            k = j;
+        }
+    }
+
+
+    public static void main(String[] args) {
+        MaxPQ<String> pq = new MaxPQ<String>(10);
+        while (!StdIn.isEmpty()) {
+            String item = StdIn.readString();
+            if (!item.equals("-")) pq.insert(item);
+            else if (!pq.isEmpty()) StdOut.print(pq.delMax() + " ");
+        }
+        StdOut.println("(" + pq.size() + " left on pq)");
+    }
 }
