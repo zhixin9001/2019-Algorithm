@@ -53,7 +53,7 @@ public class SortCompare {
     public static void main(String[] args) {
         String arg1 = args[0];
         int n = Integer.parseInt(arg1);
-        Double[] input = duplicateInput(n);
+        Double[] input = randominput(n);
         Double[] a1 = copy(input);
         Stopwatch timer = new Stopwatch();
         // InsertionX.sort(a1);
@@ -74,10 +74,10 @@ public class SortCompare {
         // Shell.sort(a1);
         // StdOut.println("Shell, " + timer.elapsedTime());
 
-        // a1 = copy(input);
-        // timer = new Stopwatch();
-        // Merge.sort(a1);
-        // StdOut.println("Merge, " + timer.elapsedTime());
+        a1 = copy(input);
+        timer = new Stopwatch();
+        Merge.sort(a1);
+        StdOut.println("Merge, " + timer.elapsedTime());
 
         // a1 = copy(input);
         // timer = new Stopwatch();
@@ -99,10 +99,15 @@ public class SortCompare {
         // QuickX.sort(a1);
         // StdOut.println("QuickX, " + timer.elapsedTime());
 
+        // a1 = copy(input);
+        // timer = new Stopwatch();
+        // Quick3Way.sort(a1);
+        // StdOut.println("Quick3Way, " + timer.elapsedTime());
+        
         a1 = copy(input);
         timer = new Stopwatch();
-        Quick3Way.sort(a1);
-        StdOut.println("Quick3Way, " + timer.elapsedTime());
+        Heap.sort(a1);
+        StdOut.println("Heap, " + timer.elapsedTime());
 
     }
 }
