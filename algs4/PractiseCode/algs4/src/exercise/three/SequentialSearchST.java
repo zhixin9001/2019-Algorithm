@@ -1,13 +1,17 @@
-package algs4.three;
+package exercise.three;
 
 import java.util.Comparator;
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.Queue;
+import edu.princeton.cs.algs4.StdDraw;
+import java.awt.Font;
 
 public class SequentialSearchST<Key, Value> {
     private Node first;
     private int n;
+    private int current;
+    private int sum;
 
     private class Node {
         Key key;
@@ -33,13 +37,15 @@ public class SequentialSearchST<Key, Value> {
     }
 
     public void put(Key key, Value value) {
+        current = 0;
         if (key == null)
             throw new IllegalArgumentException("first argument to put() is null");
 
         for (Node x = first; x != null; x = x.next) {
+            current++;
             if (key.equals(x.key)) {
-                 x.val=value;
-                 return;
+                x.val = value;
+                return;
             }
         }
         first = new Node(key, value, first);
@@ -68,13 +74,16 @@ public class SequentialSearchST<Key, Value> {
     }
 
     public static void main(String[] args) {
+
         SequentialSearchST<String, Integer> st = new SequentialSearchST<String, Integer>();
+        VisualAccumulator va=new VisualAccumulator(150000, 6000);
         for (int i = 0; !StdIn.isEmpty(); i++) {
             String key = StdIn.readString();
             st.put(key, i);
+            va.addDataValue(st.current);
         }
-        for (String s : st.keys())
-            StdOut.println(s + " " + st.get(s));
+        while (true) {
+        }
     }
 
 }
