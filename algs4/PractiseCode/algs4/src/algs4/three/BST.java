@@ -1,6 +1,7 @@
 package algs4.three;
 
 import java.util.Comparator;
+import java.util.NoSuchElementException;
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 import javafx.scene.Node;
