@@ -1,4 +1,4 @@
-package algs4.three;
+package exercise.three;
 
 import java.util.Comparator;
 import java.util.NoSuchElementException;
@@ -11,6 +11,7 @@ import java.awt.Font;
 
 public class BST<Key extends Comparable<Key>, Value> {
     private Node root;
+    private int current;
 
     private class Node {
         private Key key;
@@ -60,10 +61,12 @@ public class BST<Key extends Comparable<Key>, Value> {
     }
 
     public void put(Key key, Value val) {
+        current=0;
         root = put(root, key, val);
     }
 
     private Node put(Node x, Key key, Value val) {
+        current++;
         if (key == null)
             throw new IllegalArgumentException("calls put() with a null key");
         if (x == null)
@@ -137,18 +140,20 @@ public class BST<Key extends Comparable<Key>, Value> {
     }
 
     public static void main(String[] args) {
+        int minlen = 8;
         BST<String, Integer> st = new BST<String, Integer>();
+        VisualAccumulator va = new VisualAccumulator(15000, 50);
         for (int i = 0; !StdIn.isEmpty(); i++) {
             String key = StdIn.readString();
+            if (key.length() < minlen)
+                continue;
             st.put(key, i);
+            va.addDataValue(st.current);
         }
 
-        StdOut.println();
+        // StdOut.println();
 
-        for (String s : st.keys())
-            StdOut.println(s + " " + st.get(s));
-
-        StdOut.println("min=" + st.min());
-        StdOut.println("max=" + st.max());
+        // for (String s : st.keys())
+        //     StdOut.println(s + " " + st.get(s));
     }
 }

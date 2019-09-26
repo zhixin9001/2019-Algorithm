@@ -119,7 +119,7 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> {
     public static void main(String[] args) {
         int minlen = 8;
         BinarySearchST<String, Integer> st = new BinarySearchST<String, Integer>(150000);
-        VisualAccumulator va = new VisualAccumulator(150000, 6000);
+        VisualAccumulator va = new VisualAccumulator(15000, 6000);
         for (int i = 0; !StdIn.isEmpty(); i++) {
             String key = StdIn.readString();
             if (key.length() < minlen)
@@ -133,4 +133,4 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> {
         //     StdOut.println(s + " " + st.get(s));
     }
 
-}
+}   
