@@ -106,6 +106,40 @@ public class BST<Key extends Comparable<Key>, Value> {
             return max(x.right);
     }
 
+    private Key floor(Key key) {
+        if (isEmpty())
+            throw new NoSuchElementException("calls max() with empty symbol table");
+        Node n = floor(root, key);
+        if (n == null) {
+            return null;
+        } else {
+            return n.key;
+        }
+    }
+
+    private Node floor(Node x, Key key) {
+        if (x == null) {
+            return null;
+        }
+        if (x.right == null) {
+            return null;
+        }
+        int cmp = key.compareTo(x.key);
+        if (cmp <= 0) {
+            return floor(x.left, key);
+        } else {
+            Node n = floor(x.right, key);
+            if (n == null) {
+                return floor(x.left, key);
+            } else {
+                return n;
+            }
+        }
+
+    }
+
+    }
+
     public Iterable<Key> keys() {
         if (isEmpty())
             return new Queue<Key>();
