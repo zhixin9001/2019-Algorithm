@@ -74,15 +74,17 @@ public class SequentialSearchST<Key, Value> {
     }
 
     public static void main(String[] args) {
-
+        int distinct = 0, words = 0;
+        int minlen = 8;
         SequentialSearchST<String, Integer> st = new SequentialSearchST<String, Integer>();
-        VisualAccumulator va=new VisualAccumulator(150000, 6000);
+        VisualAccumulator va = new VisualAccumulator(150000, 10000);
         for (int i = 0; !StdIn.isEmpty(); i++) {
             String key = StdIn.readString();
+            if (key.length() < minlen)
+                continue;
+            // words++;
             st.put(key, i);
             va.addDataValue(st.current);
-        }
-        while (true) {
         }
     }
 
