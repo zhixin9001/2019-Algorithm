@@ -106,7 +106,25 @@ public class BST<Key extends Comparable<Key>, Value> {
             return max(x.right);
     }
 
+    // public Key floor(Key key) {
+    //     if (key == null) throw new IllegalArgumentException("argument to floor() is null");
+    //     if (isEmpty()) throw new NoSuchElementException("calls floor() with empty symbol table");
+    //     Node x = floor(root, key);
+    //     if (x == null) return null;
+    //     else return x.key;
+    // } 
+
+    // private Node floor(Node x, Key key) {
+    //     if (x == null) return null;
+    //     int cmp = key.compareTo(x.key);
+    //     if (cmp == 0) return x;
+    //     if (cmp <  0) return floor(x.left, key);
+    //     Node t = floor(x.right, key); 
+    //     if (t != null) return t;
+    //     else return x; 
+    // } 
     private Key floor(Key key) {
+        if (key == null) throw new IllegalArgumentException("argument to floor() is null");
         if (isEmpty())
             throw new NoSuchElementException("calls max() with empty symbol table");
         Node n = floor(root, key);
@@ -121,23 +139,49 @@ public class BST<Key extends Comparable<Key>, Value> {
         if (x == null) {
             return null;
         }
-        if (x.right == null) {
-            return null;
-        }
-        int cmp = key.compareTo(x.key);
-        if (cmp <= 0) {
-            return floor(x.left, key);
-        } else {
-            Node n = floor(x.right, key);
-            if (n == null) {
-                return floor(x.left, key);
-            } else {
-                return n;
-            }
-        }
 
+        int cmp = key.compareTo(x.key);
+        if (cmp == 0)
+            return x;
+        if (cmp < 0)
+            return floor(x.left, key);
+
+        Node n = floor(x.right, key);
+        if (n == null) {
+            return x;
+        } else {
+            return n;
+        }
     }
 
+    private Key ceiling(Key key) {
+        if (isEmpty())
+            throw new NoSuchElementException("calls max() with empty symbol table");
+        Node n = ceiling(root, key);
+        if (n == null) {
+            return null;
+        } else {
+            return n.key;
+        }
+    }
+
+    private Node ceiling(Node x, Key key) {
+        if (x == null) {
+            return null;
+        }
+
+        int cmp = key.compareTo(x.key);
+        if (cmp == 0)
+            return x;
+        if (cmp > 0)
+            return ceiling(x.right, key);
+
+        Node n = ceiling(x.left, key);
+        if (n == null) {
+            return x;
+        } else {
+            return n;
+        }
     }
 
     public Iterable<Key> keys() {
@@ -181,8 +225,9 @@ public class BST<Key extends Comparable<Key>, Value> {
 
         for (String s : st.keys())
             StdOut.println(s + " " + st.get(s));
+        String key = args[0];
 
-        StdOut.println("min=" + st.min());
-        StdOut.println("max=" + st.max());
+        StdOut.println("floor=" + st.floor(key));
+        StdOut.println("ceiling=" + st.ceiling(key));
     }
 }
