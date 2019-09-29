@@ -16,7 +16,7 @@ public class BST<Key extends Comparable<Key>, Value> {
         private Key key;
         private Value val;
         private Node left, right;
-        private int size;
+        public int size;
 
         public Node(Key key, Value val, int size) {
             this.key = key;
@@ -29,7 +29,7 @@ public class BST<Key extends Comparable<Key>, Value> {
         return size(root);
     }
 
-    private int size(Node x) {
+    public int size(Node x) {
         if (x == null)
             return 0;
         else
@@ -56,6 +56,25 @@ public class BST<Key extends Comparable<Key>, Value> {
             return get(x.left, key);
         } else {
             return x.val;
+        }
+    }
+
+    public Node getNode(Key key) {
+        return getNode(root, key);
+    }
+
+    private Node getNode(Node x, Key key) {
+        if (key == null)
+            throw new IllegalArgumentException("calls get() with a null key");
+        if (x == null)
+            return null;
+        int cmp = key.compareTo(x.key);
+        if (cmp > 0) {
+            return getNode(x.right, key);
+        } else if (cmp < 0) {
+            return getNode(x.left, key);
+        } else {
+            return x;
         }
     }
 
@@ -107,24 +126,27 @@ public class BST<Key extends Comparable<Key>, Value> {
     }
 
     // public Key floor(Key key) {
-    //     if (key == null) throw new IllegalArgumentException("argument to floor() is null");
-    //     if (isEmpty()) throw new NoSuchElementException("calls floor() with empty symbol table");
-    //     Node x = floor(root, key);
-    //     if (x == null) return null;
-    //     else return x.key;
-    // } 
+    // if (key == null) throw new IllegalArgumentException("argument to floor() is
+    // null");
+    // if (isEmpty()) throw new NoSuchElementException("calls floor() with empty
+    // symbol table");
+    // Node x = floor(root, key);
+    // if (x == null) return null;
+    // else return x.key;
+    // }
 
     // private Node floor(Node x, Key key) {
-    //     if (x == null) return null;
-    //     int cmp = key.compareTo(x.key);
-    //     if (cmp == 0) return x;
-    //     if (cmp <  0) return floor(x.left, key);
-    //     Node t = floor(x.right, key); 
-    //     if (t != null) return t;
-    //     else return x; 
-    // } 
+    // if (x == null) return null;
+    // int cmp = key.compareTo(x.key);
+    // if (cmp == 0) return x;
+    // if (cmp < 0) return floor(x.left, key);
+    // Node t = floor(x.right, key);
+    // if (t != null) return t;
+    // else return x;
+    // }
     private Key floor(Key key) {
-        if (key == null) throw new IllegalArgumentException("argument to floor() is null");
+        if (key == null)
+            throw new IllegalArgumentException("argument to floor() is null");
         if (isEmpty())
             throw new NoSuchElementException("calls max() with empty symbol table");
         Node n = floor(root, key);
@@ -184,6 +206,28 @@ public class BST<Key extends Comparable<Key>, Value> {
         }
     }
 
+    public Key select(int k) {
+        if (k < 0 || k >= size()) {
+            throw new IllegalArgumentException("argument to select() is invalid: " + k);
+        }
+        return select(root, k).key;
+    }
+
+    public Node select(Node x, int k) {
+        if (x == null) {
+            return null;
+        }
+
+        int t = size(x.left);
+        if (t > k) {
+            return select(x.left, k);
+        } else if (t < k) {
+            return select(x.right, k - t - 1);
+        } else {
+            return x;
+        }
+    }
+
     public Iterable<Key> keys() {
         if (isEmpty())
             return new Queue<Key>();
@@ -224,10 +268,10 @@ public class BST<Key extends Comparable<Key>, Value> {
         StdOut.println();
 
         for (String s : st.keys())
-            StdOut.println(s + " " + st.get(s));
+            StdOut.println(s + " " + st.size(st.getNode(s)));
         String key = args[0];
 
-        StdOut.println("floor=" + st.floor(key));
-        StdOut.println("ceiling=" + st.ceiling(key));
+        StdOut.println("select " + key + "=" + st.select(Integer.parseInt(key)));
+        // StdOut.println("ceiling=" + st.ceiling(key));
     }
 }
