@@ -255,6 +255,22 @@ public class BST<Key extends Comparable<Key>, Value> {
         x.right = deleteMax(x.right);
         x.size = size(x.left) + size(x.right) + 1;
         return x;
+    public int rank(Key key) {
+        return rank(key, root);
+    }
+
+    private int rank(Key key, Node x) {
+        if (x == null) {
+            return 0;
+        }
+        int cmp = key.compareTo(x.key);
+        if (cmp > 0) {
+            return size(x.left) + size(x.right) + 1;
+        } else if (cmp < 0) {
+            return size(x.left);
+        } else {
+            return x.size();
+        }
     }
 
     public Iterable<Key> keys() {
