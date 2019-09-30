@@ -228,6 +228,35 @@ public class BST<Key extends Comparable<Key>, Value> {
         }
     }
 
+    public void deleteMin() {
+        if (isEmpty())
+            throw new NoSuchElementException("Symbol table underflow");
+        root = deleteMin(root);
+    }
+
+    private Node deleteMin(Node x) {
+        if (x.left == null)
+            return x.right;
+        x.left = deleteMin(x.left);
+        x.size = size(x.left) + size(x.right) + 1;
+        return x;
+
+    }
+
+    public void deleteMax() {
+        if (isEmpty())
+            throw new NoSuchElementException("Symbol table underflow");
+        root = deleteMax(root);
+    }
+
+    private Node deleteMax(Node x) {
+        if (x.right == null)
+            return x.left;
+        x.right = deleteMax(x.right);
+        x.size = size(x.left) + size(x.right) + 1;
+        return x;
+    }
+
     public Iterable<Key> keys() {
         if (isEmpty())
             return new Queue<Key>();
@@ -269,9 +298,13 @@ public class BST<Key extends Comparable<Key>, Value> {
 
         for (String s : st.keys())
             StdOut.println(s + " " + st.size(st.getNode(s)));
-        String key = args[0];
-
-        StdOut.println("select " + key + "=" + st.select(Integer.parseInt(key)));
+        // String key = args[0];
+        st.deleteMax();
+        // StdOut.println("select " + key + "=" + st.select(Integer.parseInt(key)));
         // StdOut.println("ceiling=" + st.ceiling(key));
+
+        StdOut.println("=====");
+        for (String s : st.keys())
+            StdOut.println(s + " " + st.size(st.getNode(s)));
     }
 }
