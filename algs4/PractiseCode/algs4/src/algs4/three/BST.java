@@ -144,7 +144,7 @@ public class BST<Key extends Comparable<Key>, Value> {
     // if (t != null) return t;
     // else return x;
     // }
-    private Key floor(Key key) {
+    public Key floor(Key key) {
         if (key == null)
             throw new IllegalArgumentException("argument to floor() is null");
         if (isEmpty())
@@ -176,7 +176,7 @@ public class BST<Key extends Comparable<Key>, Value> {
         }
     }
 
-    private Key ceiling(Key key) {
+    public Key ceiling(Key key) {
         if (isEmpty())
             throw new NoSuchElementException("calls max() with empty symbol table");
         Node n = ceiling(root, key);
@@ -213,7 +213,7 @@ public class BST<Key extends Comparable<Key>, Value> {
         return select(root, k).key;
     }
 
-    public Node select(Node x, int k) {
+    private Node select(Node x, int k) {
         if (x == null) {
             return null;
         }
@@ -225,6 +225,40 @@ public class BST<Key extends Comparable<Key>, Value> {
             return select(x.right, k - t - 1);
         } else {
             return x;
+        }
+    }
+
+    public int rank(Key key) {
+        if (key == null)
+            throw new IllegalArgumentException("argument to rank() is null");
+        return rank(key, root);
+    }
+
+    // private int rank(Key key, Node x) {
+    // if (x == null) {
+    // return 0;
+    // }
+    // int cmp = key.compareTo(x.key);
+    // if (cmp > 0) {
+    // return size(x.left) + size(x.right) + 1;
+    // } else if (cmp < 0) {
+    // return size(x.left);
+    // } else {
+    // return x.size;
+    // }
+    // }
+
+    private int rank(Key key, Node x) {
+        if (x == null) {
+            return 0;
+        }
+        int cmp = key.compareTo(x.key);
+        if (cmp > 0) {
+            return size(x.left) + rank(key, x.right) + 1;
+        } else if (cmp < 0) {
+            return rank(key, x.left);
+        } else {
+            return size(x.left);
         }
     }
 
@@ -240,7 +274,6 @@ public class BST<Key extends Comparable<Key>, Value> {
         x.left = deleteMin(x.left);
         x.size = size(x.left) + size(x.right) + 1;
         return x;
-
     }
 
     public void deleteMax() {
@@ -255,22 +288,35 @@ public class BST<Key extends Comparable<Key>, Value> {
         x.right = deleteMax(x.right);
         x.size = size(x.left) + size(x.right) + 1;
         return x;
-    public int rank(Key key) {
-        return rank(key, root);
     }
 
-    private int rank(Key key, Node x) {
-        if (x == null) {
-            return 0;
-        }
+    public void delete(Key key) {
+        if (key == null)
+            throw new IllegalArgumentException("calls delete() with a null key");
+        root = delete(root, key);
+    }
+
+    private Node delete(Node x, Key key) {
+        if (x == null)
+            return null;
+
         int cmp = key.compareTo(x.key);
-        if (cmp > 0) {
-            return size(x.left) + size(x.right) + 1;
-        } else if (cmp < 0) {
-            return size(x.left);
-        } else {
-            return x.size();
+        if (cmp < 0)
+            x.left = delete(x.left, key);
+        else if (cmp > 0)
+            x.right = delete(x.right, key);
+        else {
+            if (x.right == null)
+                return x.left;
+            if (x.left == null)
+                return x.right;
+            Node t = x;
+            x = min(t.right);
+            x.right = deleteMin(t.right);
+            x.left = t.left;
         }
+        x.size = size(x.left) + size(x.right) + 1;
+        return x;
     }
 
     public Iterable<Key> keys() {
@@ -290,7 +336,7 @@ public class BST<Key extends Comparable<Key>, Value> {
         return queue;
     }
 
-    private void keys(Node x, Queue<Key> queue, Key lo, Key hi) {
+    public void keys(Node x, Queue<Key> queue, Key lo, Key hi) {
         if (x == null)
             return;
         int cmplo = lo.compareTo(x.key);
@@ -314,12 +360,13 @@ public class BST<Key extends Comparable<Key>, Value> {
 
         for (String s : st.keys())
             StdOut.println(s + " " + st.size(st.getNode(s)));
-        // String key = args[0];
-        st.deleteMax();
-        // StdOut.println("select " + key + "=" + st.select(Integer.parseInt(key)));
-        // StdOut.println("ceiling=" + st.ceiling(key));
+        String key = args[0];
+        // st.deleteMax();
+        StdOut.println("DELETE " + key);
+        // st.delete(key);
 
         StdOut.println("=====");
+
         for (String s : st.keys())
             StdOut.println(s + " " + st.size(st.getNode(s)));
     }
