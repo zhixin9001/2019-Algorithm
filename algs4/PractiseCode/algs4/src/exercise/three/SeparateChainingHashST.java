@@ -1,4 +1,4 @@
-package algs4.three;
+package exercise.three;
 
 import java.security.Key;
 import java.util.Comparator;
@@ -7,15 +7,15 @@ import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.Queue;
 import edu.princeton.cs.algs4.StdDraw;
-import algs4.three.SequentialSearchST;
-// import java.util.Queue;
+import exercise.three.SequentialSearchST4Hash;
 
 public class SeparateChainingHashST<Key, Value> {
     private static final int INIT_CAPACITY = 4;
 
     private int n; // count of k-v pairs
     private int m; // size of hashtable
-    private SequentialSearchST<Key, Value>[] st;
+    private int current;
+    private SequentialSearchST4Hash<Key, Value>[] st;
 
     public SeparateChainingHashST() {
         this(INIT_CAPACITY);
@@ -23,9 +23,9 @@ public class SeparateChainingHashST<Key, Value> {
 
     public SeparateChainingHashST(int M) {
         this.m = M;
-        st = (SequentialSearchST<Key, Value>[]) new SequentialSearchST[M];
+        st = (SequentialSearchST4Hash<Key, Value>[]) new SequentialSearchST4Hash[M];
         for (int i = 0; i < M; i++) {
-            st[i] = new SequentialSearchST();
+            st[i] = new SequentialSearchST4Hash();
         }
     }
 
@@ -42,32 +42,38 @@ public class SeparateChainingHashST<Key, Value> {
     public void put(Key key, Value val) {
         if (key == null)
             throw new IllegalArgumentException("first argument to put() is null");
-
+        current = 0;
         // if (val == null) {
-        //     delete(key);
-        //     return;
+        // delete(key);
+        // return;
         // }
         // double table size if average length of list >= 10
         if (n >= 10 * m)
             resize(2 * m);
 
         int i = hash(key);
-        if (!st[i].contains(key))
+
+        SequentialSearchST4Hash st4Hash = st[i];
+        current++;
+        if (!st4Hash.contains(key))
             n++;
-        st[i].put(key, val);
+
+        st4Hash.put(key, val);
+        current += st4Hash.current;
+
     }
 
     // public void delete(Key key) {
-    //     if (key == null)
-    //         throw new IllegalArgumentException("argument to delete() is null");
+    // if (key == null)
+    // throw new IllegalArgumentException("argument to delete() is null");
 
-    //     int i = hash(key);
-    //     if (st[i].contains(key))
-    //         n--;
-    //     st[i].delete(key);
+    // int i = hash(key);
+    // if (st[i].contains(key))
+    // n--;
+    // st[i].delete(key);
 
-    //     if (m < INIT_CAPACITY && size() < 2 * m)
-    //         resize(m / 2);
+    // if (m < INIT_CAPACITY && size() < 2 * m)
+    // resize(m / 2);
     // }
 
     public void resize(int chains) {
@@ -102,15 +108,15 @@ public class SeparateChainingHashST<Key, Value> {
     }
 
     public static void main(String[] args) {
+        int minlen = 8;
         SeparateChainingHashST<String, Integer> st = new SeparateChainingHashST<String, Integer>();
+        VisualAccumulator va = new VisualAccumulator(15000, 50);
         for (int i = 0; !StdIn.isEmpty(); i++) {
             String key = StdIn.readString();
+            if (key.length() < minlen)
+                continue;
             st.put(key, i);
+            va.addDataValue(st.current);
         }
-
-        StdOut.println();
-
-        for (String s : st.keys())
-            StdOut.println(s + "-" + st.get(s));
     }
 }
