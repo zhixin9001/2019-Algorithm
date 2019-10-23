@@ -17,9 +17,10 @@ public class LinerProbingHashST<Key, Value> {
         this(16);
     }
 
-    public LinerProbingHashST(int capaticy) {
-        keys = (Key[]) new Object[capaticy];
-        vals = (Value[]) new Object[capaticy];
+    public LinerProbingHashST(int capacity) {
+        keys = (Key[]) new Object[capacity];
+        vals = (Value[]) new Object[capacity];
+        m=capacity;
     }
 
     private int hash(Key key) {
