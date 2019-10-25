@@ -72,7 +72,7 @@ public class SeparateChainingHashST<Key, Value> {
     // n--;
     // st[i].delete(key);
 
-    // if (m < INIT_CAPACITY && size() < 2 * m)
+    // if (m > INIT_CAPACITY && size() < 2 * m)
     // resize(m / 2);
     // }
 
