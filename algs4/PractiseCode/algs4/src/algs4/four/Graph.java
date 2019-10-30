@@ -1,7 +1,12 @@
 package algs4.four;
+
 import java.util.NoSuchElementException;
+import edu.princeton.cs.algs4.StdIn;
+import edu.princeton.cs.algs4.StdOut;
+import edu.princeton.cs.algs4.In;
 
 public class Graph {
+    private static final String NEWLINE = System.getProperty("line.separator");
     private final int V; // vertex
     private int E; // edge
     private Bag<Integer>[] adj;
@@ -39,7 +44,27 @@ public class Graph {
         E++;
     }
 
-    public Iterable<Integer> adj(int v){
+    public Iterable<Integer> adj(int v) {
         return adj[v];
+    }
+
+    public String toString() {
+        StringBuilder s = new StringBuilder();
+        s.append(V + " vertices, " + E + " edges " + NEWLINE);
+        for (int v = 0; v < V; v++) {
+            s.append(v + ": ");
+            for (int w : adj[v]) {
+                s.append(w + " ");
+            }
+            s.append(NEWLINE);
+        }
+        return s.toString();
+    }
+
+    // java algs4.four.Graph ..\..\..\algs4-data\tinyG.txt
+    public static void main(String[] args) {
+        In in = new In(args[0]);
+        Graph G = new Graph(in);
+        StdOut.println(G);
     }
 }
