@@ -1,11 +1,12 @@
 package algs4.four;
 
 import java.util.NoSuchElementException;
-import java.util.Stack;
+// import java.util.Stack;
 
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.In;
+import edu.princeton.cs.algs4.Stack;
 
 public class DepthFirstSearch {
     private boolean[] marked;
@@ -56,6 +57,7 @@ public class DepthFirstSearch {
         return path;
     }
 
+    //cmd /c --% java algs4.four.DepthFirstSearch ..\..\..\algs4-data\tinyCG.txt 0 
     public static void main(String[] args) {
         In in = new In(args[0]);
         Graph G = new Graph(in);
