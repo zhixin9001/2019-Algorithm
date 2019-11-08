@@ -1,4 +1,4 @@
-package algs4.four;
+package exercise.four;
 
 import java.util.NoSuchElementException;
 import edu.princeton.cs.algs4.StdIn;
@@ -12,30 +12,30 @@ public class BreadthFirstPaths {
     private int[] edgeTo;
     private final int s;
 
-    public BreadthFirstPaths(Graph G, int s) {
-        marked = new boolean[G.V()];
-        edgeTo = new int[G.V()];
+    public BreadthFirstPaths(Graph g, int s) {
+        this.marked = new boolean[g.V()];
+        this.edgeTo = new int[g.V()];
         this.s = s;
-        bfs(G, s);
+        bfs(g, s);
     }
 
-    private void bfs(Graph G, int s) {
-        Queue<Integer> queue = new Queue<Integer>();
+    private void bfs(Graph g, int s) {
         marked[s] = true;
+        Queue<Integer> queue = new Queue<Integer>();
         queue.enqueue(s);
         while (!queue.isEmpty()) {
             int v = queue.dequeue();
-            for (int w : G.adj(v)) {
-                if(!marked[w]){
-                    edgeTo[w]=v;
-                    marked[w]=true;
+            for (int w : g.adj(v)) {
+                if (!marked[w]) {
+                    edgeTo[w] = v;
+                    marked[w] = true;
                     queue.enqueue(w);
                 }
             }
         }
     }
 
-    public boolean hasPathTo(int v){
+    public boolean hasPathTo(int v) {
         return marked[v];
     }
 
@@ -52,9 +52,9 @@ public class BreadthFirstPaths {
         return path;
     }
 
-    
-     // cmd /c --% java algs4.four.BreadthFirstPaths ..\..\..\algs4-data\tinyCG.txt 0
-     public static void main(String[] args) {
+    // cmd /c --% java exercise.four.BreadthFirstPaths
+    // ..\..\..\algs4-data\tinyCG.txt 0
+    public static void main(String[] args) {
         In in = new In(args[0]);
         int s = Integer.parseInt(args[1]);
         Graph g = new Graph(in);
