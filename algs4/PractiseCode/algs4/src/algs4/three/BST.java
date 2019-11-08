@@ -44,6 +44,11 @@ public class BST<Key extends Comparable<Key>, Value> {
         return get(root, key);
     }
 
+    public boolean contains(Key key) {
+        if (key == null) throw new IllegalArgumentException("argument to contains() is null");
+        return get(key) != null;
+    }
+
     private Value get(Node x, Key key) {
         if (key == null)
             throw new IllegalArgumentException("calls get() with a null key");
