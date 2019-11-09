@@ -29,8 +29,10 @@ public class DirectedDFS {
                 dfs(g, w);
     }
 
+    //cmd /c --% java algs4.four.DirectedDFS ..\..\..\algs4-data\tinyDG.txt 1 2 6
     public static void main(String[] args) {
-        Digraph g = new Digraph(args[0]);
+        In in = new In(args[0]);
+        Digraph g = new Digraph(in);
         Bag<Integer> sources = new Bag<Integer>();
         for (int i = 1; i < args.length; i++) {
             sources.add(Integer.parseInt(args[i]));
@@ -42,5 +44,6 @@ public class DirectedDFS {
                 StdOut.print(v + " ");
             }
         }
+        StdOut.println();
     }
 }
