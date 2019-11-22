@@ -39,8 +39,7 @@ public class DirectedCycle {
                     cycle.push(x);
                 }
 
-                cycle.push(w);
-                cycle.push(v);
+                cycle.push(w); 
             }
         }
 
