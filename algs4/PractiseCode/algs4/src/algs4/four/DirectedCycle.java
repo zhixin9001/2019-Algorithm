@@ -54,7 +54,7 @@ public class DirectedCycle {
         return cycle;
     }
 
-    // cmd /c --% java algs4.four.DirectedCycle ..\..\..\algs4-data\tinyDG.txt 1 2 6
+    // cmd /c --% java algs4.four.DirectedCycle ..\..\..\algs4-data\tinyDG.txt
     public static void main(String[] args) {
         In in = new In(args[0]);
         Digraph g = new Digraph(in);
