@@ -13,7 +13,7 @@ public class DepthFirstOrder {
     private Queue<Integer> post;
     private Stack<Integer> reversePost;
 
-    public DepthFirstOrder(Graph G) {
+    public DepthFirstOrder(Digraph G) {
         pre=new Queue<Integer>();
         post=new Queue<Integer>();
         reversePost=new Stack<Integer>();
@@ -24,7 +24,7 @@ public class DepthFirstOrder {
         }
     }
 
-    private void dfs(Graph G, int v) {
+    private void dfs(Digraph G, int v) {
         pre.enqueue(v);
         marked[v] = true;
         for (int w : G.adj(v)) {
@@ -55,14 +55,14 @@ public class DepthFirstOrder {
     //cmd /c --% java algs4.four.DepthFirstOrder ..\..\..\algs4-data\tinyCG.txt 
     public static void main(String[] args) {
         In in = new In(args[0]);
-        Graph G = new Graph(in);
+        Digraph G = new Digraph(in);
         DepthFirstOrder order = new DepthFirstOrder(G);
 
         StdOut.println("pre:");
-        // for(int pre:order.pre()){
-        //     StdOut.print(pre + " ");
-        // }
-        while(order.pre().isEmpty)
+        for(int pre:order.pre()){
+            StdOut.print(pre + " ");
+        }
+
         StdOut.println();
         StdOut.println("post:");
         for(int post:order.post()){
