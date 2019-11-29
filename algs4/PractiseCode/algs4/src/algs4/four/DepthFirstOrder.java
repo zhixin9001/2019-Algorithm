@@ -13,7 +13,7 @@ public class DepthFirstOrder {
     private Queue<Integer> post;
     private Stack<Integer> reversePost;
 
-    public DepthFirstOrder(Graph G) {
+    public DepthFirstOrder(Digraph G) {
         pre=new Queue<Integer>();
         post=new Queue<Integer>();
         reversePost=new Stack<Integer>();
@@ -24,7 +24,7 @@ public class DepthFirstOrder {
         }
     }
 
-    private void dfs(Graph G, int v) {
+    private void dfs(Digraph G, int v) {
         pre.enqueue(v);
         marked[v] = true;
         for (int w : G.adj(v)) {
