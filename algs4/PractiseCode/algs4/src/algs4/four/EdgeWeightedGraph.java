@@ -52,7 +52,7 @@ public class EdgeWeightedGraph {
         return adj[v];
     }
 
-    public String toString(){
+    public String toString() {
         StringBuilder s = new StringBuilder();
         s.append(V + " vertices, " + E + " edges " + NEWLINE);
         for (int v = 0; v < V; v++) {
@@ -63,6 +63,16 @@ public class EdgeWeightedGraph {
             s.append(NEWLINE);
         }
         return s.toString();
+    }
+
+    public Bag<Edge> edges() {
+        Bag<Edge> b = new Bag<Edge>();
+        for (int v = 0; v < V; v++) {
+            for (Edge w : adj[v]) {
+                b.add(w);
+            }            
+        }
+        return b;
     }
 
     // cmd /c --% java algs4.four.EdgeWeightedGraph ..\..\..\algs4-data\tinyEWG.txt

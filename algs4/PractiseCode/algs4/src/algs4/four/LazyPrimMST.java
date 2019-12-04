@@ -32,9 +32,9 @@ public class LazyPrimMST {
     }
 
     public void visit(EdgeWeightedGraph G, int v) {
-        marked[v] = true;        
-        for (Edge e : G.adj(v)){            
-            if (!marked[e.other(v)]){
+        marked[v] = true;
+        for (Edge e : G.adj(v)) {
+            if (!marked[e.other(v)]) {
                 pq.insert(e);
             }
         }
@@ -48,10 +48,13 @@ public class LazyPrimMST {
     public static void main(String[] args) {
         In in = new In(args[0]);
         EdgeWeightedGraph ewg = new EdgeWeightedGraph(in);
-        LazyPrimMST lazyPrim=new LazyPrimMST(ewg);
+        LazyPrimMST lazyPrim = new LazyPrimMST(ewg);
         // StdOut.println(ewg);
-        for(Edge e:lazyPrim.edges()){
+        double weight=0;
+        for (Edge e : lazyPrim.edges()) {
+            weight += e.weight();
             StdOut.println(e);
-        }        
+        }
+        StdOut.println(weight);
     }
 }
