@@ -7,9 +7,9 @@ import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.In;
 
 public class Edge implements Comparable<Edge> {
-    private final int v; // vertex
-    private final int w; // vertex
-    private final double weight; // vertex
+    private final int v; 
+    private final int w; 
+    private final double weight; 
 
     public Edge(int v, int w, double weight) {
         this.v = v;
