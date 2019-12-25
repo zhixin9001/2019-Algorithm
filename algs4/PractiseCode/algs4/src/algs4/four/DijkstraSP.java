@@ -47,23 +47,21 @@ public class DijkstraSP {
     }
 
     public double distTo(int w) {
-        return distTo(w);
+        return distTo[w];
     }
 
     public boolean hasPathTo(int w) {
-        return distTo(w) != Double.POSITIVE_INFINITY;
+        return distTo(w) < Double.POSITIVE_INFINITY;
     }
 
-    public Iterable<Integer> pathTo(int v) {
+    public Iterable<DirectedEdge> pathTo(int v) {
         if (!hasPathTo(v))
             return null;
 
-        Stack<Integer> path = new Stack<Integer>();
-        for (int a = v; a != s; a = edgeTo[a]) {
+        Stack<DirectedEdge> path = new Stack<DirectedEdge>();
+        for (DirectedEdge a = edgeTo[v]; a != null; a = edgeTo[a.from()]) {
             path.push(a);
         }
-
-        path.push(s);
         return path;
     }
 
@@ -75,7 +73,7 @@ public class DijkstraSP {
         DijkstraSP dijkstraSP = new DijkstraSP(ewdg, s);
 
         for (int t = 0; t < ewdg.V(); t++) {
-            StdOut.println(s + " to " + t);
+            StdOut.print(s + " to " + t);
             StdOut.printf(" (%4.2f): ", dijkstraSP.distTo(t));
             if (dijkstraSP.hasPathTo(t)) {
                 for (DirectedEdge e : dijkstraSP.pathTo(t)) {

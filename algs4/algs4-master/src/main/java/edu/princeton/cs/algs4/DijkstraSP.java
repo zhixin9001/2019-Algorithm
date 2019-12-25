@@ -210,6 +210,7 @@ public class DijkstraSP {
      * Unit tests the {@code DijkstraSP} data type.
      *
      * @param args the command-line arguments
+     * cmd /c --% java edu.princeton.cs.algs4.DijkstraSP ..\..\..\algs4-data\tinyEWG.txt
      */
     public static void main(String[] args) {
         In in = new In(args[0]);
