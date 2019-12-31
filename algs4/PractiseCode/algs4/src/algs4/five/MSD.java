@@ -6,7 +6,7 @@ import edu.princeton.cs.algs4.Insertion;
 
 public class MSD {
     private static int R = 256;
-    private static final int M = 15;
+    private static final int M = 0;
     private static String[] aux;
 
     private static int charAt(String s, int d) {
@@ -19,10 +19,15 @@ public class MSD {
     public static void sort(String[] a) {
         int N = a.length;
         aux = new String[N];
+        StdOut.println(String.format("sort(a, %s, %s, %s)", 0, N - 1, 0));
         sort(a, 0, N - 1, 0);
+
     }
 
+    public static int index;
+
     public static void sort(String[] a, int lo, int hi, int d) {
+        index++;
         if (hi <= lo + M) {
             insertion(a, lo, hi, d);
             return;
@@ -41,8 +46,25 @@ public class MSD {
         for (int i = lo; i <= hi; i++)
             a[i] = aux[i - lo];
 
-        for (int r = 0; r < R; r++)
+        StdOut.print("count= ");
+        for (int i : count) {
+            StdOut.print(String.format("%d ", i));
+        }
+        StdOut.println();
+        StdOut.print("a= ");
+        for (String s : a) {
+            StdOut.print(String.format("%s ", s));
+        }
+        StdOut.println();
+        StdOut.print("aux= ");
+        for (String s : aux) {
+            StdOut.print(String.format("%s ", s));
+        }
+        StdOut.println();
+        for (int r = 0; r < R; r++) {
+            StdOut.println(String.format("%d sort(a, %s, %s, %s)", index, lo + count[r], lo + count[r + 1] - 1, d + 1));
             sort(a, lo + count[r], lo + count[r + 1] - 1, d + 1);
+        }
     }
 
     // insertion sort a[lo..hi], starting at dth character
@@ -72,6 +94,7 @@ public class MSD {
     }
 
     // cmd /c --% java algs4.five.MSD < ..\..\..\algs4-data\words3.txt
+    // cmd /c --% java algs4.five.MSD < .\algs4\five\testWords.txt
     public static void main(String[] args) {
         String[] a = StdIn.readAllStrings();
         int n = a.length;
