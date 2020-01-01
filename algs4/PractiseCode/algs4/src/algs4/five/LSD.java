@@ -32,15 +32,17 @@ public class LSD {
 
     // cmd /c --% java algs4.five.LSD < ..\..\..\algs4-data\words3.txt
     public static void main(String[] args) {
-        String[] a = StdIn.readAllStrings();
-        int n = a.length;
-        int w = a[0].length();
+        // String[] a = StdIn.readAllStrings();
+        // int n = a.length;
+        // int w = a[0].length();
 
-        // sort the strings
-        sort(a, w);
-        // print results
-        for (int i = 0; i < n; i++)
-            StdOut.println(a[i]);
+        // // sort the strings
+        // sort(a, w);
+        // // print results
+        // for (int i = 0; i < n; i++)
+        //     StdOut.println(a[i]);
+        String a="bed";
+        StdOut.println(a.charAt(1)+0);
     }
 
     /**
