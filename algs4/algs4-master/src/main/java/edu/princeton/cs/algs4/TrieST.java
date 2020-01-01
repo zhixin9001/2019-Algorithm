@@ -15,6 +15,8 @@
  *  shells 3
  *  shore 7
  *  the 5
+ * javac edu\princeton\cs\algs4\TrieST.java
+ * cmd /c --% java edu.princeton.cs.algs4.TrieST < ..\..\..\..\algs4-data\shellsST.txt
  *
  ******************************************************************************/
 
