@@ -110,6 +110,28 @@ public class TrieST<Value> {
         return search(x.next[c], s, d + 1, length);
     }
 
+    public void delete(String key) {
+        root = delete(root, key, 0);
+    }
+
+    private Node delete(Node x, String key, int d) {
+        if (x == null)
+            return null;
+        if (d == key.length())
+            x.val = null;
+        else {
+            char c = key.charAt(d);
+            x.next[c] = delete(x.next[c], key, d + 1);
+        }
+
+        if (x.val != null)
+            return x;
+        for (char c = 0; c < R; c++)
+            if (x.next[c] != null)
+                return x;
+        return null;
+    }
+
     // cmd /c --% java algs4.five.TrieST < ..\..\..\algs4-data\shellsST.txt
     public static void main(String[] args) {
         TrieST<Integer> st = new TrieST<Integer>();
@@ -118,13 +140,13 @@ public class TrieST<Value> {
             st.put(key, i);
         }
 
+        st.delete("by");
         StdOut.println("keys(\"\"):");
         for (String key : st.keys()) {
             StdOut.println(key + " " + st.get(key));
         }
         StdOut.println();
 
-        
         StdOut.println("longestPrefixOf(\"shellsort\"):");
         StdOut.println(st.longestPrefixOf("shellsort"));
         StdOut.println();
