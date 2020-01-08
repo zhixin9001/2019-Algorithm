@@ -4,7 +4,7 @@ import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.Queue;
 
-public class TrieST<Value> {
+public class TST<Value> {
     private Node root;
 
     private class Node {
