@@ -1,5 +1,7 @@
 package algs4.five;
 
+import javax.lang.model.util.ElementScanner6;
+
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 
@@ -10,15 +12,33 @@ public class KMP {
     public KMP(String pat) {
         this.pat = pat;
         int M = pat.length();
-        int R = 256;
+        int R = 3;
         dfa = new int[R][M];
-        dfa[pat.charAt(0)][0] = 1;
+        dfa[charAt(pat.charAt(0))][0] = 1;
         for (int X = 0, j = 1; j < M; j++) {
             for (int c = 0; c < R; c++)
                 dfa[c][j] = dfa[c][X];
-            dfa[pat.charAt(j)][j] = j + 1;
-            X = dfa[pat.charAt(j)][X];
+            dfa[charAt(pat.charAt(j))][j] = j + 1;
+            X = dfa[charAt(pat.charAt(j))][X];
         }
+        for (int i = 0; i < R; i++) {
+            for (int j = 0; j < M; j++)
+                StdOut.print(" " + dfa[i][j]);
+            StdOut.println();
+
+        }
+    }
+
+    public int charAt(char c) {
+        StdOut.println(c);
+        if (c == 'A')
+            return 0;
+        else if (c == 'B')
+            return 1;
+        else if (c == 'C')
+            return 2;
+        else
+            return 1000;
     }
 
     public int search(String txt) {
@@ -37,9 +57,10 @@ public class KMP {
         String txt = "AAAAAAABBBBBBBCCCCCCCABCABCAABBCC";
         String pat = args[0];
         KMP kmp = new KMP(pat);
-        int index = kmp.search(txt);
-        StdOut.println(index);
-        StdOut.println("a".charAt(0)+0);
-        StdOut.println(txt.substring(index, index + pat.length()));
+
+        // int index = kmp.search(txt);
+        // StdOut.println(index);
+        // StdOut.println("a".charAt(0) + 0);
+        // StdOut.println(txt.substring(index, index + pat.length()));
     }
 }

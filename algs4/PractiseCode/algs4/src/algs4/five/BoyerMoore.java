@@ -9,7 +9,7 @@ public class BoyerMoore {
 
     public BoyerMoore(String pat) {
         this.pat = pat;
-        int M = pat.length;
+        int M = pat.length();
         int R = 256;
         right = new int[R];
         for (int c = 0; c < R; c++)
