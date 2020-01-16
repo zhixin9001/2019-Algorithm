@@ -17,6 +17,7 @@ public class RabinKarp {
         this.pat = pat;
         M = pat.length();
         Q = longRandomPrime();
+        StdOut.println(Q);
         RM = 1;
         for (int i = 1; i <= M - 1; i++)
             RM = (R * RM) % Q;
