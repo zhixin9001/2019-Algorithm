@@ -4,6 +4,7 @@ import algs4.four.Digraph;
 import algs4.four.DirectedDFS;
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
+import edu.princeton.cs.algs4.Stack;
 import exercise.four.Bag;
 
 public class Regular {
@@ -46,7 +47,7 @@ public class Regular {
         DirectedDFS dfs = new DirectedDFS(G, 0);
         for (int v = 0; v < G.V(); v++) {
             if (dfs.marked(v))
-                pc.add(V);
+                pc.add(v);
         }
 
         for (int i = 0; i < txt.length(); i++) {
@@ -68,9 +69,14 @@ public class Regular {
         return false;
     }
 
+    // cmd /c --% java algs4.five.Regular "(A*B|AC)D" < ..\..\..\algs4-data\tinyL.txt
     public static void main(String[] args) {
         String regexp = "(.*" + args[0] + ".*)";
         Regular re = new Regular(regexp);
-        // while(Std)
+        while (StdIn.hasNextLine()) {
+            String txt = StdIn.readLine();
+            if (re.recognize(txt))
+                StdOut.println(txt);
+        }
     }
 }

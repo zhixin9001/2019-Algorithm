@@ -22,6 +22,10 @@ public class DirectedDFS {
         }
     }
 
+    public boolean marked(int v){
+        return marked[v];
+    }
+
     private void dfs(Digraph g, int v) {
         marked[v] = true;
         for (int w : g.adj(v))
