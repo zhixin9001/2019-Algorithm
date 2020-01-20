@@ -5,6 +5,7 @@ import edu.princeton.cs.algs4.BinaryStdOut;
 import edu.princeton.cs.algs4.Alphabet;
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
+import edu.princeton.cs.algs4.MinPQ;
 
 public class Huffman {
     private static int R = 256;
@@ -31,6 +32,26 @@ public class Huffman {
     }
 
     public static void compress() {
+        String s = BinaryStdIn.readString();
+        char[] input = s.toCharArray();
+
+        int[] freq = new int[R];
+        for (int i = 0; i < input.length; i++)
+            freq[input[i]]++;
+
+        Node root = buildTrie(freq);
+        String[] st = new String[R];
+        buildCode(st, root, "");
+        writeTrie(root);
+        BinaryStdOut.write(input.length);
+        for (int i = 0; i < input.length; i++) {
+            String code = st[input[i]];
+            for (int j = 0; j < code.length(); j++)
+                if (code.charAt(j) == '1')
+                    BinaryStdOut.write(true);
+                else
+                    BinaryStdOut.write(false);
+        }
         BinaryStdOut.close();
     }
 
@@ -47,12 +68,6 @@ public class Huffman {
             BinaryStdOut.write(x.ch);
         }
         BinaryStdOut.close();
-    }
-
-    private static String[] buildCode(Node root) {
-        String[] st = new String[R];
-        buildCode(st, root, "");
-        return st;
     }
 
     private static void buildCode(String[] st, Node x, String s) {
@@ -81,7 +96,7 @@ public class Huffman {
     private static void writeTrie(Node x) {
         if (x.isLeaf()) {
             BinaryStdOut.write(true);
-            BinaryStdout.write(x.ch);
+            BinaryStdOut.write(x.ch);
             return;
         }
         BinaryStdOut.write(false);
@@ -95,10 +110,12 @@ public class Huffman {
         return new Node('\0', 0, readTrie(), readTrie());
     }
 
-    // cmd /c --% java algs4.five.Huffman - < ..\..\..\algs4-data\q32x48.bin | java
-    // algs4.five.BinaryDump 40
-    // java algs4.five.Genome - < ..\..\..\algs4-data\genomeTiny.txt | java
-    // java algs4.five.BinaryDump 40 < ..\..\..\algs4-data\q64x96.bin
+    /* cmd /c --% java algs4.five.Huffman - < ..\..\..\algs4-data\medTale.txt | java algs4.five.PictureDump 512 47
+     cmd /c --% java algs4.five.Huffman - < ..\..\..\algs4-data\medTale.txt | java algs4.five.HexDump 48
+     java algs4.five.HexDump 48 < ..\..\..\algs4-data\medTale.txt
+     java algs4.five.Genome - < ..\..\..\algs4-data\genomeTiny.txt | java
+     java algs4.five.BinaryDump 40 < ..\..\..\algs4-data\q64x96.bin
+    */
     public static void main(String[] args) {
         if (args[0].equals("-"))
             compress();
