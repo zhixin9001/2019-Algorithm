@@ -7,7 +7,7 @@ import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.TST;
 
-public class LWZ {
+public class LZW {
     private static final int R = 256;
     private static final int L = 4096;
     private static final int W = 12;
@@ -58,9 +58,9 @@ public class LWZ {
         BinaryStdOut.close();
     }
 
-    /* cmd /c --% java algs4.five.LWZ - < ..\..\..\algs4-data\medTale.txt | java algs4.five.PictureDump 512 47
-     cmd /c --% java algs4.five.LWZ - < ..\..\..\algs4-data\medTale.txt | java algs4.five.HexDump 48
-     cmd /c --% java algs4.five.LWZ - "ABRACADABRABRABRA" | java algs4.five.HexDump 48
+    /* cmd /c --% java algs4.five.LZW - < ..\..\..\algs4-data\medTale.txt | java algs4.five.PictureDump 512 47
+     cmd /c --% java algs4.five.LZW - < ..\..\..\algs4-data\medTale.txt | java algs4.five.HexDump 48
+     cmd /c --% java algs4.five.LZW - "ABRACADABRABRABRA" | java algs4.five.HexDump 48
     */
     public static void main(String[] args) {
         if (args[0].equals("-"))
